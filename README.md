@@ -2,6 +2,8 @@
 
 Osnova: http://seba.eu.org/public/geiger/
 
+![Geiger Counter v. 1.0](geiger_export.jpg)
+
 ## Ideja 1
 
 Dodamo voltage doublerje (dioda + kondenzator) 2x. POdobno idejo ima implementirano [Maxmintegrated](https://www.maximintegrated.com/en/design/technical-documents/app-notes/3/3757.html). Razlika je, da je ta Maximov načrt bolj "analogen", napetost je treba nastavljati na roke, povratna zanka pa je pri neki nižji napetosti, ki se jo dvigne z voltage
