@@ -27,3 +27,6 @@ Zaščita vezja: vezje bi lahko premazali z mešanico epoksi smole, zmešane z b
 Če je dovolj visoka radiacija, znižaš napetost (z mikrokontrolerjem), da prideš iz Geiger območja v proporcionalno območje. Namreč, v Geiger območju ti zadeva da pulz enak ne glede na energijo (se pravi zaznava delce, ne pa njihove energije). V proporcionalnem območju (nižja napetost) pa je sicer manj občutljivo, ampak je integral pulza proporcionalen energiji delca. S tem pa lahko potem izračunaš dejansko sevanje, oz. koliko energije ima posamezen delec.
 
 Nadalje bi se dalo narediti tako, da meriš 10 sekund v proporcionalnem območju in 10 sekund v Geiger območju, in to alterniraš, in potem iz tega izračunas dejansko kok miligrayov na uro je sevanja, ne pa samo števila delcev na časovno enoto.
+
+## Ideja 7
+Podatki se beležijo na SD kartico/notranji pomnilnik ter pošiljajo ven preko WiFi, Bluetooth ali LoRa povezave. Naprava ima display (OLED?), ki prikazuje trenutno izmerjeno vrednost/povprečje za zadnjih X minut. Podatki se ne zbirajo v centralni bazi, pač pa distribuirano (IPFS?).
