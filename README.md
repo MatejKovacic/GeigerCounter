@@ -6,7 +6,7 @@ Osnova: http://seba.eu.org/public/geiger/
 
 ## Ideja 1
 
-Dodamo voltage doublerje (dioda + kondenzator) 2x. POdobno idejo ima implementirano [Maxmintegrated](https://www.maximintegrated.com/en/design/technical-documents/app-notes/3/3757.html). Razlika je, da je ta Maximov načrt bolj "analogen", napetost je treba nastavljati na roke, povratna zanka pa je pri neki nižji napetosti, ki se jo dvigne z voltage
+Dodamo voltage doublerje (dioda + kondenzator) 2x. Podobno idejo ima implementirano [Maxmintegrated](https://www.maximintegrated.com/en/design/technical-documents/app-notes/3/3757.html). Razlika je, da je ta Maximov načrt bolj "analogen", napetost je treba nastavljati na roke, povratna zanka pa je pri neki nižji napetosti, ki se jo dvigne z voltage
 multiplierji.
 
 ## Ideja 2
@@ -18,7 +18,7 @@ Prednost tega bi bila, da bi bolje delalo na baterije, poleg tega se 82M upore m
 Trenutna verzija troši 300 mikroamperov na 5V, se pravi 1.5 mW, ampak bi se dalo narediti izboljšave.
 
 ## Ideja 4
-Doda se MOSFET tranzistor ki bi, ko zazna delec, kratkostičil Geigerjevo cev. Namreč, če narediš to kratkostičenje potem imaš (teoretično) 10 - 100x višji razpon v katerem meriš radiacijo. Nadalje, ker mikrokontroler generira PWM za napajanje cevi in ima direkten feedback loop lahko preko tega tudi zaznaš če je preveč radiacije oz. je radiacija nad mejo. Takrat namreč cev stalno prevaja. Za to mend acelo obstaja en patent na to temo.
+Doda se MOSFET tranzistor ki bi, ko zazna delec, kratkostičil Geigerjevo cev. Če narediš to kratkostičenje potem imaš (teoretično) 10 - 100x višji razpon v katerem meriš radiacijo. Nadalje, ker mikrokontroler generira PWM za napajanje cevi in ima direkten feedback loop lahko preko tega tudi zaznaš če je preveč radiacije oz. je radiacija nad mejo. Takrat namreč cev stalno prevaja. Za to menda celo obstaja en patent na to temo.
 
 ## Ideja 5
 Zaščita vezja: vezje bi lahko premazali z mešanico epoksi smole, zmešane z barijevim sulfatom. S tem bi dobili dobro zaščito pred radiacijo. Barijev sulfat je poceni, netopen v vodi, neprevoden in nestrupen.
@@ -30,3 +30,9 @@ Nadalje bi se dalo narediti tako, da meriš 10 sekund v proporcionalnem območju
 
 ## Ideja 7
 Podatki se beležijo na SD kartico/notranji pomnilnik ter pošiljajo ven preko WiFi, Bluetooth ali LoRa povezave. Naprava ima display (OLED?), ki prikazuje trenutno izmerjeno vrednost/povprečje za zadnjih X minut. Podatki se ne zbirajo v centralni bazi, pač pa distribuirano (IPFS?).
+
+## Ideja 8
+Namesto Arduino Nano se uporabi ESP32. Pomembna razlika je, da ima ESP32 3V izhode, Arduino nano pa 5V izhode. Potrebno je poskrbeti tudi za napajanje. ESP32 se lahko napaja preko USB porta, neposredno preko PIN-ov 5V in GND (neregulirana napetost med 5V in 12V), ali neposredno preko PIN-ov 3.3V in GND (regulirana napetost 3.3V). Naprava mora imeti tudi OLED zaslon.
+
+## Ideja 9
+Dodati je treba baterije (11865 ali 21700) ter polnilni del.
