@@ -18,7 +18,7 @@ Prednost tega bi bila, da bi bolje delalo na baterije, poleg tega se 82M upore m
 Trenutna verzija troši 300 mikroamperov na 5V, se pravi 1.5 mW, ampak bi se dalo narediti izboljšave.
 
 ## Ideja 4
-Doda se MOSFET tranzistor ki bi, ko zazna delec, kratkostičil Geigerjevo cev. Če narediš to kratkostičenje potem imaš (teoretično) 10 - 100x višji razpon v katerem meriš radiacijo. Nadalje, ker mikrokontroler generira PWM za napajanje cevi in ima direkten feedback loop lahko preko tega tudi zaznaš če je preveč radiacije oz. je radiacija nad mejo. Takrat namreč cev stalno prevaja. Za to menda celo obstaja en patent na to temo.
+Doda se MOSFET tranzistor ki bi, ko zazna delec, kratkostičil Geigerjevo cev. Če narediš to kratkostičenje potem imaš (teoretično) 10 - 100x višji razpon v katerem meriš radiacijo. Nadalje, ker mikrokontroler generira PWM za napajanje cevi in ima direkten feedback loop lahko preko tega tudi zaznaš če je preveč radiacije oz. je radiacija nad mejo. Takrat namreč cev stalno prevaja. Za to [obstaja patent št. US4453076A](https://patentimages.storage.googleapis.com/74/59/dc/d22516a8492bd9/US4453076.pdf).
 
 ## Ideja 5
 Zaščita vezja: vezje bi lahko premazali z mešanico epoksi smole, zmešane z barijevim sulfatom. S tem bi dobili dobro zaščito pred radiacijo. Barijev sulfat je poceni, netopen v vodi, neprevoden in nestrupen.
