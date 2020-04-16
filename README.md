@@ -36,3 +36,12 @@ Namesto Arduino Nano se uporabi ESP32. Pomembna razlika je, da ima ESP32 3V izho
 
 ## Ideja 9
 Dodati je treba baterije (11865 ali 21700) ter polnilni del.
+
+## Ideja 10
+Uporabi se lahko različne cevi:
+ - LND-712: 560V
+ - SBM-20: 400 V
+ - [CMOS tipalo](https://hackaday.com/2012/01/15/turn-your-camera-phone-into-a-geiger-counter/)
+ - [Type 5 Pocket Geiger Radiation Sensor[(https://www.sparkfun.com/products/14209) (to j everjetno kar CMOS senzor, zavit v bakreno folijo)
+
+[Seznam in primerjava cevi](https://sites.google.com/site/diygeigercounter/technical/gm-tubes-supported?authuser=0).
