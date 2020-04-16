@@ -42,7 +42,7 @@ Uporabi se lahko različne cevi ali fotodiode:
  - LND-712: 560V
  - SBM-20: 400 V
  - [CMOS tipalo](https://hackaday.com/2012/01/15/turn-your-camera-phone-into-a-geiger-counter/)
- - [Type 5 Pocket Geiger Radiation Sensor[(https://www.sparkfun.com/products/14209) (to je verjetno kar CMOS senzor, zavit v bakreno folijo?)
+ - [Type 5 Pocket Geiger Radiation Sensor](https://www.sparkfun.com/products/14209) (to je verjetno kar CMOS senzor, zavit v bakreno folijo?)
  - [Portable Radiation Detector](https://www.instructables.com/id/Radiation-Detector/)
  - [Pocket Photodiode Geiger Counter](https://www.instructables.com/id/Pocket-Photodiode-Geiger-Counter/)
  - [Silicon photodiodes for gamma ray detection](http://www.terezakis.me/wp-content/uploads//2014/02/gamma-ray-detection_0.pdf)
