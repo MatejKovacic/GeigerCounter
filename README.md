@@ -8,15 +8,15 @@ Osnovo (napajalni del) je [razvil Sebastjan Pleško](http://seba.eu.org/public/g
 
 ### Različica 2 (že razvito)
 
-Vezje je zasnovano v SMD tehniki. Vse komponente so splošno dostopne in imajo široke tolerance oz. so čim manj občutljive. Vezje je zgrajeno okrog ESP8266 (NodeMCU v3), ki ima 3.3 V izhode. Napetost na Geigerjevi cevi se nastavlja s pomočjo ESP8266, kjer s pomočjo PWM signala in množilnika napetosti programsko nastavljamo končno napetost na Geigerjevi cevi (s pomočjo tim. [boost converter-ja](https://en.wikipedia.org/wiki/Boost_converter)).
+Vezje je zasnovano v SMD tehniki. Vse komponente so splošno dostopne in imajo široke tolerance oz. so čim manj občutljive. Vezje je zgrajeno okrog ESP8266 (NodeMCU v3), ki ima 3.3 V izhode. Napetost na Geigerjevi cevi se nastavlja s pomočjo ESP8266, kjer s pomočjo PWM signala in množilnika napetosti programsko nastavljamo končno napetost na Geigerjevi cevi (s pomočjo tim. [boost converter-ja](https://en.wikipedia.org/wiki/Boost_converter)). S povratnim pinom (na ESP8266) merimo (preverjamo) napetost na cevi.
 
-Ker vezje omogoča programsko nastavljanje napetosti, lahko na vezje priključimo katerokoli Geigerjevo cev (različne Geigerjeve cei namreč delujejo pri različnih napetostih, npr. SBM-20 na 400 V, LND-712 na 560 V, itd.
+Ker vezje omogoča programsko nastavljanje napetosti, lahko na vezje priključimo katerokoli Geigerjevo cev (različne Geigerjeve cevi namreč delujejo pri različnih napetostih, npr. SBM-20 na 400 V, LND-712 na 560 V, itd.
  
  - [Seznam in primerjava Geigerjevih cevi](https://sites.google.com/site/diygeigercounter/technical/gm-tubes-supported?authuser=0).
 
 
 ### 1) Različna podnožja
-Namesto ESP8266 bo mogoče uporabiti Arduino Nano, ESP32 ali druge ESP module, ki se jih bo vstavilo v podnožje naprave.
+Namesto ESP8266 (NodeMCU) bo mogoče uporabiti Arduino Nano, ESP32 ali druge ESP module (TTGO,..), ki se jih bo vstavilo v podnožje naprave.
 
 ### 2) Napajalni del
 Napajanje lahko poteka preko USB vrat ali neposredno preko PIN-ov (neregulirana napetost preko voltage regulatorja ali  regulirana napetost).
@@ -63,12 +63,14 @@ Radiacijo merimo s fotodiodami in Geigerjevo cevjo. S tem bi lahko merili števi
 
 Nadalje bi se dalo narediti tako, da merimo 10 sekund v proporcionalnem območju in 10 sekund v Geiger območju, in to alterniramo, in potem iz tega izračunamo dejansko koliko miligrayov na uro je sevanja, ne pa samo števila delcev na časovno enoto.
 
+Opcija bi bila tudi uporaba dveh Geigerjevih cevi (napajalni del bi bil potem podvojen), kjer bi ena Geigerjeva cev delala na Geigerjevem območju, ena pa na proporcionalnem.
+
 ## Programska oprema
-Uporabimo BlueSensor JSON strukturo senzorskih podatkov. 
+Uporabimo [BlueSensor JSON strukturo](https://github.com/MatejKovacic/BlueSensor#our-json-format) senzorskih podatkov. 
 
-Podatki se ne zbirajo v centralni bazi, pač pa distribuirano (ideja: IPFS?).
+Podatki se ne zbirajo v centralni bazi, pač pa distribuirano (ideja: [IPFS](https://ipfs.io/)?).
 
-Aplikacija za prikaz podatkov.
+Spletna aplikacija za prikaz podatkov.
 
 
 ## Razno
