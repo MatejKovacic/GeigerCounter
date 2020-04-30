@@ -56,6 +56,8 @@ Alarm funkcija: ob povečani stopnji sevanja zaprava začne piskati in oddajati 
 
 Izračunati je potrebno porabo celotnega vezja, implementirati spalni način in izračunati porabo v spalnem načinu.
 
+Indikator baterije.
+
 Radiacijo merimo s fotodiodami in Geigerjevo cevjo. S tem bi lahko merili število delcev in energijo delcev hkrati.
 
 ### Naprednejše merjenje 
