@@ -1,50 +1,77 @@
 # GeigerCounter
 
-Osnova: http://seba.eu.org/public/geiger/
+Osnovo (napajalni del) je [razvil Sebastjan Pleško](http://seba.eu.org/public/geiger/):
 
 ![Geiger Counter v. 1.0](geiger_export.jpg)
 
-## Ideja 1 (narejeno)
+## Strojna oprema
 
-Dodamo voltage doublerje (dioda + kondenzator) 2x. Podobno idejo ima implementirano [Maxmintegrated](https://www.maximintegrated.com/en/design/technical-documents/app-notes/3/3757.html). Razlika je, da je ta Maximov načrt bolj "analogen", napetost je treba nastavljati na roke, povratna zanka pa je pri neki nižji napetosti, ki se jo dvigne z voltage
-multiplierji.
+### Različica 2 (že razvito)
 
-## Ideja 2 (narejeno)
-Vse komponente morajo biti splošno dostopne, vse mora imeti zelo široke tolerance oz. ne sme biti občutljivo. Zato bi bilo treba izboljšati povratno zanko, ki je sedaj narejena z 4x82M Ohm uporom, lahko pa bi uporabili 10M Ohm upore in potem voltage multiplierje več stopenj.
+Vezje je zasnovano v SMD tehniki. Vse komponente so splošno dostopne in imajo široke tolerance oz. so čim manj občutljive. Vezje je zgrajeno okrog ESP8266 (NodeMCU v3), ki ima 3.3 V izhode. Napetost na Geigerjevi cevi se nastavlja s pomočjo ESP8266, kjer s pomočjo PWM signala in množilnika napetosti programsko nastavljamo končno napetost na Geigerjevi cevi (s pomočjo tim. [boost converter-ja](https://en.wikipedia.org/wiki/Boost_converter)).
 
-Prednost tega bi bila, da bi bolje delalo na baterije, poleg tega se 82M upore malo težje dobi, ter če se bodo umazali skozi leta, bo narobe delalo. Predlog: naredi se tako, da imaš 1 upor od 10 M Ohm potem pa izhod narediš recimo x8 z voltage doublerji.
+Ker vezje omogoča programsko nastavljanje napetosti, lahko na vezje priključimo katerokoli Geigerjevo cev (različne Geigerjeve cei namreč delujejo pri različnih napetostih, npr. SBM-20 na 400 V, LND-712 na 560 V, itd.
+ 
+ - [Seznam in primerjava Geigerjevih cevi](https://sites.google.com/site/diygeigercounter/technical/gm-tubes-supported?authuser=0).
 
-## Ideja 3 (narejeno)
-Trenutna verzija troši 300 mikroamperov na 5V, se pravi 1.5 mW, ampak bi se dalo narediti izboljšave.
 
-## Ideja 4
-Doda se MOSFET tranzistor ki bi, ko zazna delec, kratkostičil Geigerjevo cev. Če narediš to kratkostičenje potem imaš (teoretično) 10 - 100x višji razpon v katerem meriš radiacijo. Nadalje, ker mikrokontroler generira PWM za napajanje cevi in ima direkten feedback loop lahko preko tega tudi zaznaš če je preveč radiacije oz. je radiacija nad mejo. Takrat namreč cev stalno prevaja. Za to [obstaja patent št. US4453076A](https://patentimages.storage.googleapis.com/74/59/dc/d22516a8492bd9/US4453076.pdf).
+### 1) Različna podnožja
+Namesto ESP8266 bo mogoče uporabiti Arduino Nano, ESP32 ali druge ESP module, ki se jih bo vstavilo v podnožje naprave.
 
-## Ideja 5
-Zaščita vezja: vezje bi lahko premazali z mešanico epoksi smole, zmešane z barijevim sulfatom. S tem bi dobili dobro zaščito pred radiacijo. Barijev sulfat je poceni, netopen v vodi, neprevoden in nestrupen. Preveri: podjetje OMF.
+### 2) Napajalni del
+Napajanje lahko poteka preko USB vrat ali neposredno preko PIN-ov (neregulirana napetost preko voltage regulatorja ali  regulirana napetost).
 
-## Ideja 6
-Če je dovolj visoka radiacija, znižaš napetost (z mikrokontrolerjem), da prideš iz Geiger območja v proporcionalno območje. Namreč, v Geiger območju ti zadeva da pulz enak ne glede na energijo (se pravi zaznava delce, ne pa njihove energije). V proporcionalnem območju (nižja napetost) pa je sicer manj občutljivo, ampak je integral pulza proporcionalen energiji delca. S tem pa lahko potem izračunaš dejansko sevanje, oz. koliko energije ima posamezen delec.
-
-Nadalje bi se dalo narediti tako, da meriš 10 sekund v proporcionalnem območju in 10 sekund v Geiger območju, in to alterniraš, in potem iz tega izračunas dejansko kok miligrayov na uro je sevanja, ne pa samo števila delcev na časovno enoto.
-
-## Ideja 7
-Podatki se beležijo na SD kartico/notranji pomnilnik ter pošiljajo ven preko WiFi, Bluetooth ali LoRa povezave. Naprava ima display (OLED?), ki prikazuje trenutno izmerjeno vrednost/povprečje za zadnjih X minut. Podatki se ne zbirajo v centralni bazi, pač pa distribuirano (IPFS?).
-
-## Ideja 8 (delno implementirano - napajalni del še ni)
-Namesto Arduino Nano se uporabi ESP32. Pomembna razlika je, da ima ESP32 3V izhode, Arduino nano pa 5V izhode. Potrebno je poskrbeti tudi za napajanje. ESP32 se lahko napaja preko USB porta, neposredno preko PIN-ov 5V in GND (neregulirana napetost med 5V in 12V), ali neposredno preko PIN-ov 3.3V in GND (regulirana napetost 3.3V). Naprava mora imeti tudi OLED zaslon.
-
-## Ideja 9
 Dodati je treba baterije (11865 ali 21700) ter polnilni del.
 
-## Ideja 10
-Uporabi se lahko različne cevi ali fotodiode:
- - LND-712: 560V
- - SBM-20: 400 V
- - [CMOS tipalo](https://hackaday.com/2012/01/15/turn-your-camera-phone-into-a-geiger-counter/)
- - [Type 5 Pocket Geiger Radiation Sensor](https://www.sparkfun.com/products/14209) (to je verjetno kar CMOS senzor, zavit v bakreno folijo?)
+### 3) Zaslon in gumbi
+Dodati je potrebno zaslon. Uporabili bomo zaslon Nokie 5110 ter dodali nekaj programabilnih gumbov (*push button*).
+
+### 4) Merjenje sevanja z diodami
+Dodati je treba možnost merjenja sevanja (energije?) s fotodiodami. Uporabili bomo fotodiodo BPW34. Dve ideji:
  - [Portable Radiation Detector](https://www.instructables.com/id/Radiation-Detector/)
  - [Pocket Photodiode Geiger Counter](https://www.instructables.com/id/Pocket-Photodiode-Geiger-Counter/)
+
+### 5) MOSFET tranzistor
+Dodati je treba se MOSFET tranzistor ki bi, ko zazna delec, kratkostičil Geigerjevo cev. Če narediš to kratkostičenje potem imaš (teoretično) 10 - 100x višji razpon v katerem meriš radiacijo. Nadalje, ker mikrokontroler generira PWM za napajanje cevi in ima direkten feedback loop lahko preko tega tudi zaznaš če je preveč radiacije oz. je radiacija nad mejo. Takrat namreč cev stalno prevaja. Za to [obstaja patent št. US4453076A](https://patentimages.storage.googleapis.com/74/59/dc/d22516a8492bd9/US4453076.pdf).
+
+### 6) Shranjevanje podatkov
+Dodati je treba modul za SD kartico, na katero se bodo zapisovali podatki
+
+### 7) Komunikacija
+NodeMCU podpira WiFi in Bluetooth povezave. V prihodnosti bo potrebno dodati možnost LoRa povezave.
+
+### 8) Zaščita vezja
+Vezje bomo premazali z mešanico epoksi smole, zmešane z barijevim sulfatom. S tem bi dobili dobro zaščito pred radiacijo. Barijev sulfat je poceni, netopen v vodi, neprevoden in nestrupen. Preveriti je potrebno kakšno mešanico ponuja podjetje OMF.
+
+### 9) GPS modul
+Dodati je treba možnost priklop GPS modula (če bo naprava mobilna oz montirana na dronu).
+
+## Ohišje
+Ko bo izdelana končna različica naprave bomo izdelali 3D model plastičnega ohišja, ki ga je mogoče natisniti s 3D tiskalnikom.
+
+## Strojna programska oprema
+Naprava bo na zaslonu prikazovala trenutno izmerjeno vrednost ter povprečje za zadnjih X minut.
+
+Alarm funkcija: ob povečani stopnji sevanja zaprava začne piskati in oddajati svetlobne signale. Mejo je mogoče nastaviti programsko.
+
+Izračunati je potrebno porabo celotnega vezja, implementirati spalni način in izračunati porabo v spalnem načinu.
+
+Radiacijo merimo s fotodiodami in Geigerjevo cevjo. S tem bi lahko merili število delcev in energijo delcev hkrati.
+
+### Naprednejše merjenje 
+Če je dovolj visoka radiacija, z mikrokrimilnikom znižamo napetost, da naprava pride iz Geiger območja v proporcionalno območje. V Geiger območju ob sevanju dobimo pulz, ki je vedno enak ne glede na energijo (Geigerjeva cev zaznava delce, ne pa njihove energije). V proporcionalnem območju (nižja napetost) pa je meritev sicer manj občutljivo, vendar pa je integral pulza proporcionalen energiji delca. S tem pa lahko potem izračunamo dejansko sevanje, oz. koliko energije ima posamezen delec.
+
+Nadalje bi se dalo narediti tako, da merimo 10 sekund v proporcionalnem območju in 10 sekund v Geiger območju, in to alterniramo, in potem iz tega izračunamo dejansko koliko miligrayov na uro je sevanja, ne pa samo števila delcev na časovno enoto.
+
+## Programska oprema
+Uporabimo BlueSensor JSON strukturo senzorskih podatkov. 
+
+Podatki se ne zbirajo v centralni bazi, pač pa distribuirano (ideja: IPFS?).
+
+Aplikacija za prikaz podatkov.
+
+
+## Razno
+ - [CMOS tipalo](https://hackaday.com/2012/01/15/turn-your-camera-phone-into-a-geiger-counter/)
+ - [Type 5 Pocket Geiger Radiation Sensor](https://www.sparkfun.com/products/14209) (to je verjetno kar CMOS senzor, zavit v bakreno folijo?)
  - [Silicon photodiodes for gamma ray detection](http://www.terezakis.me/wp-content/uploads//2014/02/gamma-ray-detection_0.pdf)
- 
-[Seznam in primerjava cevi](https://sites.google.com/site/diygeigercounter/technical/gm-tubes-supported?authuser=0).
