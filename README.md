@@ -2,7 +2,9 @@
 
 Osnovo (napajalni del) je [razvil Sebastjan Pleško](http://seba.eu.org/public/geiger/):
 
-![Geiger Counter v. 1.0](geiger_export.jpg)
+![Geiger Counter v. 1.2](GeigerCounter_v1_2.png)
+
+*Različica sheme: 1.2*
 
 ## Strojna oprema
 
